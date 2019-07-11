@@ -70,6 +70,12 @@ $$ s_a(x_bi + y_bj + z_bk) + s_b(x_ai + y_aj + z_ak) + $$
 
 $$ (y_az_b -y_bz_a) + (x_bz_a - x_az_b) + (x_ay_b - x_by_a)] $$
 
-This simplifies down 
+By using substitutions for the dot product and cross product, we can simplify this down to the following equation: 
 
-$$ = [s_as_b + \mathbf{a} \cdot \mathbf{b}, s_a\mathbf{b} + s_b\mathbf{a} + \mathbf{a} \times \mathbf{b}]$$
+$$q_a q_b = [s_as_b + \mathbf{a} \cdot \mathbf{b}, s_a\mathbf{b} + s_b\mathbf{a} + \mathbf{a} \times \mathbf{b}]$$
+
+## Quaternion Rotations
+
+### Alternative form for Quaternions
+
+It is difficult to view a quaternion and understand the effect it will have on a point in $\mathbb{R}^3$, so we can write our quaternions in another form before we perform the rotation. Quaternions can be expressed as $q = [\cos(\theta), \sin(\theta)\mathbf{v}]$, where the vector $\mathbf{v}$ is the axis of rotation in $\mathbb{R}^3$ and $\theta$ is the angle of the rotation. This is useful for creating quaternions for known 
