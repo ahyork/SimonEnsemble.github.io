@@ -182,12 +182,12 @@ discussed. Because we cannot construct a probability distribution from a given
 state, we cannot generate a random number to determine the next state. Instead
 we will propose a new state, and compare them with a special equation. For
 example, in the grand-canonical Monte Carlo simulation in PorousMaterials.jl the
-probability of accepting the addition of a new molecule is based on the ratio of
-equations based on the energy in the system. In the temperature example the
-probability of transitioning to the new state is proportional to the proposed
-temperature over the current temperature. With this probability, the transition
-is either accepted and the model moves to the new state or the transition is
-rejected and the system remains in the current state.
+probability of accepting the addition of a new molecule is proportional to the
+ratio of energy in the system before and after the insertion of a new molecule.
+In the temperature example the probability of transitioning to the new state is
+proportional to the proposed temperature over the current temperature. With this
+probability, the transition is either accepted and the model moves to the new
+state or the transition is rejected and the system remains in the current state.
 
 This ratio makes intuitive sense because if the proportional probability of the
 suggested move is much greater than the current state (the ratio is $\geq$ 1) it
