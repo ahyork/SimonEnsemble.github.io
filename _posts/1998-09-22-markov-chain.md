@@ -74,11 +74,11 @@ const markov_model = [0.5 0.3 0.1 0.0;
 {% endhighlight %}
 
 We can now use this matrix to calculate probability distributions. Let's say
-that today (the current state) is cloudy (column 3), and we want to create a
+that today (the current state) is cloudy (column 2), and we want to create a
 forecast for tomorrow's weather. We can look down the third column in the matrix
 to find the probabilities of seeing each type of weather tomorrow. The model
-shows there is a 10% chance of it being sunny, 30% of it staying cloudy, 40%
-chance it will rain, and a 20% chance it will snow. 
+shows there is a 30% chance of it being sunny, 20% of it staying cloudy, 40%
+chance it will rain, and a 10% chance it will snow. 
 
 ## Markov Chain Monte Carlo Algorithms
 
@@ -96,7 +96,7 @@ following code is used to transition between states. This process can be
 continued as many times as we specify.
 
 {% highlight julia %}
-unction move(state::Int)
+function move(state::Int)
 
     new_state = 1
     probability = markov_model[new_state, state]
@@ -169,22 +169,25 @@ steady_state = S[:,1] * c[1]
 ## Markov Chain Monte Carlo vs. Metropolis Hastings 
 
 We are able to use a Markov chain Monte Carlo simulation in this instance
-because we know the exact probabilities of tranisitioning to different states.
+because we know the exact probabilities of transitioning to different states.
 If we instead studied the temperature in our town and only knew that the
 probability of tomorrow's weather (the next state) was proportional to the
 current temperature we wouldn't be able to construct a probability distribution 
-based on today's temperature (the current state). Instead we could use a
+based on today's temperature (the current state). We would have to use a
 Metropolis Hastings algorithm. 
 
 Metropolis Hastings algorithms still work as ways of stepping through Markov
 chain models, but are slightly different than the Monte Carlo method previously
 discussed. Because we cannot construct a probability distribution from a given
 state, we cannot generate a random number to determine the next state. Instead
-we will propose a new state, and compare their probabilities. In the temperature
-example we would compare the temperature of the current state and the
-temperature of the proposed state. We will limit this ratio to only exist
-bewteen 0.0 and 1.0, so we can then generate a random number in that range to
-determine if the transition is accepted. 
+we will propose a new state, and compare them with a special equation. For
+example, in the grand-canonical Monte Carlo simulation in PorousMaterials.jl the
+probability of accepting the addition of a new molecule is based on the ratio of
+equations based on the energy in the system. In the temperature example the
+probability of transitioning to the new state is proportional to the proposed
+temperature over the current temperature. With this probability, the transition
+is either accepted and the model moves to the new state or the transition is
+rejected and the system remains in the current state.
 
 This ratio makes intuitive sense because if the proportional probability of the
 suggested move is much greater than the current state (the ratio is $\geq$ 1) it
